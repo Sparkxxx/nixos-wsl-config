@@ -27,7 +27,7 @@
     };
 
     # my private secrets, it's a private repository, you need to replace it with your own.
-    # the colon : directly after the domain name should be a forward slash /. So the resulting URL would be
+    # the colon ':' directly after the domain name should be a forward slash /. So the resulting URL would be
     #    git+ssh://git@git.example.com/User/repo.git
     # github-sparkx is defined in ~/.ssh/config
     mysecrets = { 
@@ -36,7 +36,7 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, NixOS-WSL, home-manager, agenix, mysecrets, ... }: {
+  outputs = inputs @ { self, nixpkgs, NixOS-WSL, home-manager, agenix, mysecrets, ... }: {
     nixosConfigurations = {
       nixos = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -55,12 +55,14 @@
           
           #NixOS-WSL.nixosModules.default
           NixOS-WSL.nixosModules.wsl
-          #{
-          #  system.stateVersion = "23.11";
-          #  wsl.enable = true;
-          #}
+          {
+           system.stateVersion = "23.11";
+           wsl.enable = true;
+          }
 
           home-manager.nixosModules.home-manager
+
+          
 
           # import & decrypt secrets in `mysecrets` in this module
           ./secrets/default.nix
