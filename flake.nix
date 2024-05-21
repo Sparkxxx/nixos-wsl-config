@@ -28,12 +28,13 @@
 
     # my private secrets, it's a private repository, you need to replace it with your own.
     mysecrets = { 
-      url = "github:Sparkxxx/nix-secrets"; 
+      #url = "github:Sparkxxx/nix-secrets"; 
+      url = "git+ssh://git@github-sparkx/Sparkxxx/nix-secrets.git?shallow=1"; 
       flake = false; 
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, ... }: {
+  outputs = inputs@{ self, nixpkgs, NixOS-WSL, home-manager, agenix, mysecrets, ... }: {
     nixosConfigurations = {
       nixos = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";

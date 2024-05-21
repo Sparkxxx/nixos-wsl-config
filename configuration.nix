@@ -1,4 +1,4 @@
-## ## https://github.com/tangtang95/nixos-wsl
+## https://github.com/tangtang95/nixos-wsl
 ## Start WSL from cmd or powershell with: wsl -d NixOS
 ## nix flake check ./flake.nix
 ## sudo nixos-rebuild switch --flake .#nixos
