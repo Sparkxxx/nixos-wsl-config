@@ -27,8 +27,10 @@
     };
 
     # my private secrets, it's a private repository, you need to replace it with your own.
+    # the colon : directly after the domain name should be a forward slash /. So the resulting URL would be
+    #    git+ssh://git@git.example.com/User/repo.git
+    # github-sparkx is defined in ~/.ssh/config
     mysecrets = { 
-      #url = "github:Sparkxxx/nix-secrets"; 
       url = "git+ssh://git@github-sparkx/Sparkxxx/nix-secrets.git?shallow=1"; 
       flake = false; 
     };

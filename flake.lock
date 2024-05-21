@@ -143,6 +143,23 @@
         "type": "github"
       }
     },
+    "mysecrets": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1716219153,
+        "narHash": "sha256-k87DSD+cGv4Gl9Tba+fKxDFbPXQdWR64Z8ZmtSGPEqc=",
+        "ref": "refs/heads/main",
+        "rev": "ab38a689a29d1036c96e651a9aa521d5d9f5f0a4",
+        "shallow": true,
+        "type": "git",
+        "url": "ssh://git@github-sparkx/Sparkxxx/nix-secrets.git"
+      },
+      "original": {
+        "shallow": true,
+        "type": "git",
+        "url": "ssh://git@github-sparkx/Sparkxxx/nix-secrets.git"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1712168706,
@@ -164,6 +181,7 @@
         "NixOS-WSL": "NixOS-WSL",
         "agenix": "agenix",
         "home-manager": "home-manager_2",
+        "mysecrets": "mysecrets",
         "nixpkgs": "nixpkgs"
       }
     },
