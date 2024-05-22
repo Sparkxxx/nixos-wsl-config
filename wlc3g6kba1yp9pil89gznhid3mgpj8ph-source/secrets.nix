@@ -3,17 +3,11 @@
 # and users can decrypt the secrets by any of the corresponding private keys.
 
 let
-
-  #users = import ../authorized_keys;
-
-  #users = import  ../ssh/authorized_keys.d/nixos;
-  # ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIpUTXh2GRc399dcggY+QwRZvVa/lqOCO0XTVldDKi2z nixos@imc-lap-wsl
-  # ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOWMGPMbcg6eRyVJSFGb/mnVaK4gJFMXW+DQKCrI5dVG root@imc-lap-wsl
-
   # Get system's ssh public key by command:
   #    cat /etc/ssh/ssh_host_ed25519_key.pub
   # If you do not have this file, you can generate all the host keys by command:
   #    sudo ssh-keygen -A
+  # Enabling ssh on the host will auto create them on the system.
 
   ## SYSTEM keys - not root user's keys (/etc/ssh/ssh_host_ed25519_key.pub):
   sys-imc-lap-wsl = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGTv6knGgj9gg2aRiQAPzLx4Bgmyn9H1Fu3U423AtSUG root@nixos";
@@ -25,11 +19,18 @@ let
   # and kept offline in a safe place.
   recovery_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIpUTXh2GRc399dcggY+QwRZvVa/lqOCO0XTVldDKi2z sparkx@agenix-recovery";
   
+  #users = import ../authorized_keys;
+  #users = import  ../ssh/authorized_keys.d/nixos;
+  # ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIpUTXh2GRc399dcggY+QwRZvVa/lqOCO0XTVldDKi2z nixos@imc-lap-wsl
+  # ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOWMGPMbcg6eRyVJSFGb/mnVaK4gJFMXW+DQKCrI5dVG root@imc-lap-wsl
+
+  ## Declare users' keys list that are used to encrypt and will be able to decrypt the secrets:
   users = [
     
     recovery_key
   ];
   
+  ## Declare system keys list that are used to encrypt and will be able to decrypt the secrets:
   systems = [
     imc-lap-wsl
     twr-z790
@@ -37,6 +38,7 @@ let
 
 in
 {
+  ## Declare the secret and who can decrypt them:
   "./test.age".publicKeys = users ++ systems;
   #"./xxx.age".publicKeys = users ++ systems;
   #"user-password.age".publicKeys = systems;
