@@ -1,6 +1,10 @@
 { config, pkgs, ... }:
 
 {
+  # sudo nixos-rebuild switch --impure --flake .#nixos
+  # https://jeppesen.io/git-commit-sign-nix-home-manager-ssh/
+  home.file.".ssh/allowed_signers".text =
+    "* ${builtins.readFile ~/.ssh/id_ed25519_github_sparkxxx.pub}";
   
   home.packages = [
 
@@ -29,6 +33,7 @@
     pkgs.vim
     pkgs.nano
     pkgs.delta
+    pkgs.mc
 
     # languages
     pkgs.rustup
@@ -106,37 +111,58 @@
       enableFishIntegration = true;
     };
     git = {
+      # https://jeppesen.io/git-commit-sign-nix-home-manager-ssh/
       enable = true;
       userName = "sparkx";
-      userEmail = "dbraileanu@gmail.com";
-      aliases = {
-        pfl = "push --force-with-lease";
-        log1l = "log --oneline";
-      };
-      extraConfig = {
-        push = {
-          default = "current";
-          autoSetupRemote = true;
+      userEmail = "15813839+Sparkxxx@users.noreply.github.com";
+
+      # extraConfig = ''
+      # Host github-sparkx
+      #     IdentityFile ~/.ssh/id_ed25519_github_sparkxxx
+      #     # Specifies that ssh should only use the identity file explicitly configured above
+      #     # required to prevent sending default identity files first.
+      #     IdentitiesOnly yes
+      # '';
+
+      extraConfig = { 
+        # Sign all commits using ssh key
+        commit.gpgsign = true;
+        gpg.format = "ssh";
+        gpg.ssh.allowedSignersFile = "~/.ssh/allowed_signers";
+        merge.conflictstyle = "zdiff3";
+        user.signingkey = "~/.ssh/id_ed25519_github_sparkxxx.pub";
+
+        url = {
+          "git+ssh://git@github.com" = {
+            insteadOf = "git+ssh://git@github-sparkx";
+          };
         };
-        pull = {
-          rebase = true;
-        };
+
+        pull = { ff = "only"; };
+        push = { default = "current"; };
+
+        # push = {
+        #   default = "current";
+        #   autoSetupRemote = true;
+        # };
+        # pull = {
+        #   rebase = true;
+        # };
         init = {
           defaultBranch = "main";
         };
         credential.helper = "store";
+      };
+      
+      aliases = {
+        pfl = "push --force-with-lease";
+        log1l = "log --oneline";
       };
     };
     
     # neovim = {
     #   enable = false;
     #   defaultEditor = false;
-    #   vimAlias = true;
-    # };
-
-    # nano = {
-    #   enable = true;
-    #   defaultEditor = true;
     #   vimAlias = true;
     # };
 

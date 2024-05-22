@@ -32,11 +32,11 @@
         "systems": "systems_2"
       },
       "locked": {
-        "lastModified": 1714136352,
-        "narHash": "sha256-BtWQ2Th/jamO1SlD+2ASSW5Jaf7JhA/JLpQHk0Goqpg=",
+        "lastModified": 1715290355,
+        "narHash": "sha256-2T7CHTqBXJJ3ZC6R/4TXTcKoXWHcvubKNj9SfomURnw=",
         "owner": "ryantm",
         "repo": "agenix",
-        "rev": "24a7ea390564ccd5b39b7884f597cfc8d7f6f44e",
+        "rev": "8d37c5bdeade12b6479c85acd133063ab53187a0",
         "type": "github"
       },
       "original": {
@@ -146,10 +146,10 @@
     "mysecrets": {
       "flake": false,
       "locked": {
-        "lastModified": 1716219153,
-        "narHash": "sha256-k87DSD+cGv4Gl9Tba+fKxDFbPXQdWR64Z8ZmtSGPEqc=",
+        "lastModified": 1716367021,
+        "narHash": "sha256-5HhAJXnMbP77X6OH7hI8S0dZsZ+mjXMa0o3AAfOK/H8=",
         "ref": "refs/heads/main",
-        "rev": "ab38a689a29d1036c96e651a9aa521d5d9f5f0a4",
+        "rev": "6b3e950a9b415530f1e175c07684b6fbbd4fab46",
         "shallow": true,
         "type": "git",
         "url": "ssh://git@github-sparkx/Sparkxxx/nix-secrets.git"

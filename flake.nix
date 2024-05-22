@@ -1,10 +1,22 @@
 
+## Configure ssh to be able to clone private repos using ssh keys:
+## in ~/.ssh/config add for both your user and ROOT user
+# Host github-sparkx
+#     # git clone git@github-sparkx:Sparkxxx/<REPO>.git .
+#     Hostname github.com
+#     IdentityFile ~/.ssh/id_ed25519_github_sparkxxx
+#     IdentitiesOnly yes # is required to prevent the SSH default behavior of sending the identity file matching the default filename for each protocol
+#     AddKeysToAgent yes # lets you avoid reentering the key passphrase every time
+## Check IdentityFile exists in location.
+## github-sparkx is used in inputs.mysecrets definition.
+
 ## https://github.com/tangtang95/nixos-wsl
 ## Start WSL from cmd or powershell with: wsl -d NixOS
 ## nix flake check ./flake.nix
 
 ## sudo nixos-rebuild switch --flake  /mnt/c/Users/IMC-1/_work_/nixos-wsl-config/#nixos
 ## sudo nixos-rebuild switch --flake .#nixos
+## sudo nixos-rebuild switch --impure --flake .#nixos
 
 {
   inputs = {
@@ -37,6 +49,7 @@
   };
 
   outputs = inputs @ { self, nixpkgs, NixOS-WSL, home-manager, agenix, mysecrets, ... }: {
+  #outputs = inputs @ { self, nixpkgs, NixOS-WSL, home-manager, ... }: {
     nixosConfigurations = {
       nixos = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -61,8 +74,6 @@
           }
 
           home-manager.nixosModules.home-manager
-
-          
 
           # import & decrypt secrets in `mysecrets` in this module
           ./secrets/default.nix

@@ -16,10 +16,10 @@
   age.secrets."test" = {
     # whether secrets are symlinked to age.secrets.<name>.path
     symlink = true;
-    # target path for decrypted file
+    # target path for decrypted file - must already exist on os 
     path = "/etc/test/";
     # encrypted file path
-    file =  "${mysecrets}/test.age";  # refer to ./xxx.age located in `mysecrets` repo
+    file =  "${mysecrets}/test.age";  # refers to path of test.age inside `mysecrets` repo
     mode = "0400";
     owner = "root";
     group = "root";
